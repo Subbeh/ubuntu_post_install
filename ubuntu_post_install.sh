@@ -15,6 +15,7 @@ DOCKER_URL="https://github.com/docker/compose/releases/download/1.25.4/docker-co
 DROPBOX_URL="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb"
 CHROME_URL="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 EXPR_VPN_URL="https://download.expressvpn.xyz/clients/linux/expressvpn_2.4.2-1_amd64.deb"
+POPCORN_URL="https://get.popcorntime.app/build/Popcorn-Time-0.3.10-Linux-64.tar.xz"
 
 export DEBIAN_FRONTEND=noninteractive
 export DEBIAN_PRIORITY=critical
@@ -402,7 +403,7 @@ install_media() {
         apt_install libgconf-2.4
         sudo mkdir /opt/popcorntime
         TEMP_DEB="$(mktemp)" && \
-          wget -q -O "$TEMP_DEB" https://get.popcorntime.app/build/Popcorn-Time-0.3.10-Linux-64.tar.xz && \
+          wget -q -O "$TEMP_DEB" ${POPCORN_URL:?not set} && \
             sudo tar Jxf "$TEMP_DEB" -C /opt/popcorntime
         sudo ln -sf /opt/popcorntime/Popcorn-Time /usr/bin/popcorntime
         ;;
