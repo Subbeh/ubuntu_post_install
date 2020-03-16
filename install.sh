@@ -18,7 +18,7 @@ log() {
     local n="-n"
     shift
   fi
-  echo -e $n "INFO:[$(date --rfc-3339=seconds)]: $*"
+  echo -e $n "[$(date --rfc-3339=seconds)]: $*"
 }
 
 
@@ -69,15 +69,6 @@ update() {
   echo -e "\e[32mdone\e[39m"
 }
 
-pre_install() {
-  if [ -d preinstall ] ; then
-    for file in preinstall/* ; do
-      source $file
-      echo Return: $?
-    done
-  fi
-}
-
 dlg() {
   declare -a options
   category=$1
@@ -103,10 +94,14 @@ run_install() {
 main() {
   log Starting script
 
-  pre_install
-  #dlg "Repositories" repositories
-  dlg "Core Packages" core
-  dlg "System Packages" system
+  #sudo apt-get update >/dev/null
+  #[ -a scripts/preinstall ] && log running preinstallation steps ... && source scripts/preinstall
+  for dir in scripts/* ; do
+    if [ -d $dir ] ; then
+      dlg "$(basename $dir)" $dir
+    fi
+  done
+  
   run_install
 }
 
