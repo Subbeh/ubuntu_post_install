@@ -1,0 +1,6 @@
+# name: VirtualBox
+
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+add_repository -f virtualbox "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian ${REL_NAME:?not set} contrib"
+apt_cmd $(sudo apt-cache search virtualbox | grep -o ^virtualbox-[0-9]\.[0-9] | tail -1)
+log "\e[32mdone\e[39m"

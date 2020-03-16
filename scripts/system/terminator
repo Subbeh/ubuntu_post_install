@@ -1,0 +1,3 @@
+# name: Terminator
+
+apt_cmd terminator

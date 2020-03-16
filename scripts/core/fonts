@@ -1,0 +1,3 @@
+# name: Fonts
+
+apt_cmd ttf-mscorefonts-installer

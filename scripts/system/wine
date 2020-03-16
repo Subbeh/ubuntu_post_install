@@ -1,0 +1,3 @@
+# name: Wine
+
+apt_cmd wine-stable

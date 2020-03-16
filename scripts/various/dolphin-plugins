@@ -1,0 +1,3 @@
+# name: Dolphin Plugins
+
+apt_cmd dolphin-plugins

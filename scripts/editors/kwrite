@@ -1,0 +1,3 @@
+# name: KWrite
+
+apt_cmd kwrite

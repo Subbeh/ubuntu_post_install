@@ -1,0 +1,6 @@
+# name: Build Essentials
+
+apt_cmd build-essential \
+        dkms \
+        libssl-dev \
+        libffi-dev 

@@ -1,0 +1,3 @@
+# name: Vim
+
+apt_cmd vim

@@ -1,0 +1,3 @@
+# name: Synaptic Package Manager
+
+apt_cmd synaptic

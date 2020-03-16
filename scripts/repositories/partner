@@ -1,0 +1,3 @@
+# name: Partner Repository
+
+add_repository deb http://archive.canonical.com/ubuntu ${REL_NAME:?not set} partner

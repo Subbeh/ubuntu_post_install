@@ -1,0 +1,18 @@
+# name: Docker
+
+apt_cmd apt-transport-https \
+        ca-certificates \
+        gnupg-agent
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add_repository -f docker "deb [arch=amd64] https://download.docker.com/linux/ubuntu ${REL_NAME:?not set} stable"
+apt_cmd docker-ce docker-ce-cli containerd.io
+
+# download docker compose
+log -n downloading docker-compose ... 
+sudo curl -sL "${DOCKER_URL:?not set}" -o /usr/local/bin/docker-compose
+log \e[32mdone\e[39m
+
+# add current user to group
+log adding usergroup 'docker'
+sudo groupadd docker
+sudo usermod -aG docker $USER

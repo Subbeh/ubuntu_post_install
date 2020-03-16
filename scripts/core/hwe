@@ -1,0 +1,4 @@
+# name: Hardware Enabled Kernel
+
+apt_cmd --install-recommends linux-generic-hwe-${REL_NO:?not set} \
+                             xserver-xorg-hwe-${REL_NO:?not set}

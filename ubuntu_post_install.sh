@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# --- TODO ---
+# INSTALL:
+# net-config
+# openssh-server
+# ZSH + ohmyzsh / ksh
+# Sublime text
+# Calibre
+#
+# SYSTEM SETTINGS:
+# Disable restoring session on Login (restarting apps open during Logout)
+
 LOGFILE=~/install.txt
 REL_NO=$(lsb_release -sr)
 REL_NAME=$(lsb_release -sc)
@@ -108,6 +119,7 @@ dlg_system() {
     310 "Asbru" $def
     311 "Terminator" $def
     312 "Kupfer" $def
+    313 "Yakuake" $def
   )
 
   choices+=" "$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -139,6 +151,7 @@ dlg_editors() {
     503 "Atom" $def
     504 "Visual Studio Code" $def
     505 "KWrite" $def
+    506 "Vim" $def
   )
 
   choices+=" "$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -165,15 +178,16 @@ dlg_various() {
   # Various
   cmd=(dialog --separate-output --checklist "Install various packages:" 22 76 16)
   options=(
-    700 "GNOME Tweaks (GNOME)" $def
-    701 "Dolphin plugins (KDE)" $def
-    702 "Transmission" $def
-    703 "Steam" $def
-    704 "Caffeine" $def
-    705 "FileZilla" $def
-    706 "Spotify" $def
-    707 "Gnome-calculator" $def
-    708 "Tusk" $def
+    700 "Transmission" $def
+    701 "Steam" $def
+    702 "Caffeine" $def
+    703 "FileZilla" $def
+    704 "Spotify" $def
+    705 "Gnome-calculator" $def
+    706 "Tusk" $def
+    707 "GNOME Tweaks (GNOME)" $def
+    708 "Dolphin plugins (KDE)" $def
+    709 "Kvantum Theme Engine (KDE)" $def
   )
 
   choices+=" "$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -332,6 +346,9 @@ install_system() {
       312) # Installing Kupfer
         apt_install kupfer
         ;;
+      313) # Installing Yakuake
+        apt_install yakuake
+        ;;
     esac
   done
 }
@@ -384,6 +401,9 @@ install_editors() {
       505) # Installing KWrite"
         apt_install kwrite
         ;;
+      506) # Installing Vim"
+        apt_install vim
+        ;;
     esac
   done
 }
@@ -418,13 +438,7 @@ install_media() {
 install_various() {
   for choice in $choices ; do
     case $choice in
-      700) # Installing GNOME Tweaks (GNOME)
-        apt_install gnome-tweaks
-        ;;
-      701) # Installing Dolphin plugins (KDE)
-        apt_install dolphin-plugins
-        ;;
-      702) # Installing Transmission
+      700) # Installing Transmission
         echo "deb http://ppa.launchpad.net/transmissionbt/ppa/ubuntu bionic main" | \
           sudo tee /etc/apt/sources.list.d/transmission.list >/dev/null
         sudo apt-get update &> /dev/null
@@ -432,24 +446,35 @@ install_various() {
                     transmission-common \
                     transmission-daemon
         ;;
-      703) # Installing Steam
+      701) # Installing Steam
         apt_install steam-installer
         ;;
-      704) # Installing Caffeine
+      702) # Installing Caffeine
         apt_install caffeine
         ;;
-      705) # Installing FileZilla
+      703) # Installing FileZilla
         apt_install filezilla
         ;;
-      706) # Installing Spotify
+      704) # Installing Spotify
         snap_install spotify
         ;;
-      707) # Installing Gnome-calculator
+      705) # Installing Gnome-calculator
         snap_install gnome-calculator
         ;;
-      708) # Installing Tusk
+      706) # Installing Tusk
         snap_install tusk
         ;;
+      707) # Installing GNOME Tweaks (GNOME)
+        apt_install gnome-tweaks
+        ;;
+      708) # Installing Dolphin plugins (KDE)
+        apt_install dolphin-plugins
+        ;;
+      709) # Installing Kvantum theme engine (KDE)
+        echo "deb http://ppa.launchpad.net/papirus/papirus/ubuntu ${REL_NAME:?not set} main" | \
+          sudo tee /etc/apt/sources.list.d/kvantum.list >/dev/null
+        sudo apt-get update &> /dev/null
+        apt_install --install-recommends adapta-kde
     esac
   done
 }

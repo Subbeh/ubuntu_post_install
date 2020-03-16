@@ -1,0 +1,3 @@
+# name: Steam
+
+apt_cmd steam-installer

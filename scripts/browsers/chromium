@@ -1,0 +1,3 @@
+# name: Chromium
+
+apt_cmd chromium-browser

@@ -1,0 +1,3 @@
+# name: Restricted Extras
+
+apt_cmd ubuntu-restricted-extras

@@ -1,0 +1,3 @@
+# name: Linux Headers
+
+apt_cmd linux-headers-$(uname -r)

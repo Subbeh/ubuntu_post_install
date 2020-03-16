@@ -1,0 +1,4 @@
+# name: Asbru
+
+curl -s https://packagecloud.io/install/repositories/asbru-cm/asbru-cm/script.deb.sh | sudo bash
+apt_cmd asbru-cm

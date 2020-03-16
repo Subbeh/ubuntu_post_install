@@ -1,0 +1,3 @@
+# name: Gedit
+
+apt_cmd gedit

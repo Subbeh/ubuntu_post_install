@@ -1,0 +1,4 @@
+# name: Java
+
+apt_cmd default-jre \
+        default-jdk

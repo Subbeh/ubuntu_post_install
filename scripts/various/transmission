@@ -1,0 +1,6 @@
+# name: Transmission
+
+add_repository -f transmission "deb http://ppa.launchpad.net/transmissionbt/ppa/ubuntu bionic main"
+apt_cmd transmission-cli \
+        transmission-common \
+        transmission-daemon

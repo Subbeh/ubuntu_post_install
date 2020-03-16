@@ -1,0 +1,4 @@
+# name: Stacer
+
+add_repository -f stacer "deb http://ppa.launchpad.net/oguzhaninan/stacer/ubuntu bionic main"
+apt_cmd stacer

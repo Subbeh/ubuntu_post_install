@@ -1,0 +1,3 @@
+# name: Visual Code
+
+snap_cmd --classic code

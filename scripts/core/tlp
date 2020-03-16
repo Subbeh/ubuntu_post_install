@@ -1,0 +1,4 @@
+# name: TLP
+
+apt_cmd tlp \
+        tlp-rdw

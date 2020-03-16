@@ -1,0 +1,4 @@
+# name: Kvantum Theme Engine
+
+add_repository -f kvantum "deb http://ppa.launchpad.net/papirus/papirus/ubuntu ${REL_NAME:?not set} main"
+apt_install --install-recommends adapta-kde

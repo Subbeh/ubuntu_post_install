@@ -1,0 +1,3 @@
+# name: IntelliJ
+
+snap_cmd intellij-idea-community --classic

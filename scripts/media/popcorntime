@@ -1,0 +1,8 @@
+# name: Popcorn Time
+
+apt_cmd libgconf-2.4
+sudo mkdir /opt/popcorntime
+TEMP_DEB="$(mktemp)" && \
+  wget -q -O "$TEMP_DEB" ${POPCORN_URL:?not set} && \
+    sudo tar Jxf "$TEMP_DEB" -C /opt/popcorntime
+sudo ln -sf /opt/popcorntime/Popcorn-Time /usr/bin/popcorntime
