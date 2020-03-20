@@ -1,5 +1,5 @@
 # name: FireFox
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A6DCF7707EBC211F >/dev/null
-add_repository -f firefox "deb http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu bionic main"
+add_repository -f firefox "deb http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu ${REL_NAME:?not set} main"
 apt_cmd firefox

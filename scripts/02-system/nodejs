@@ -1,0 +1,3 @@
+# name: NodeJS
+
+apt_cmd nodejs npm

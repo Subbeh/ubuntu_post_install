@@ -1,0 +1,3 @@
+# name: ZSH Shell
+
+apt_cmd zsh

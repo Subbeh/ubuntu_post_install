@@ -1,0 +1,5 @@
+# name: conky
+
+add_repository -f conky-manager deb http://ppa.launchpad.net/mark-pcnetspec/conky-manager-pm9/ubuntu bionic main
+
+apt_cmd conky-all conky-manager

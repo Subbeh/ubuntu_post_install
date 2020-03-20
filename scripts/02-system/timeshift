@@ -1,0 +1,4 @@
+# name: timeshift
+
+add_repository -f timeshift "deb http://ppa.launchpad.net/teejee2008/ppa/ubuntu ${REL_NAME:?not set} main"
+apt_cmd timeshift

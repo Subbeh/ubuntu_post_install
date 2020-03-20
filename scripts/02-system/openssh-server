@@ -1,0 +1,3 @@
+# name: OpenSSH Server
+
+apt_cmd openssh-server

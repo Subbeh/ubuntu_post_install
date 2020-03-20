@@ -1,3 +1,15 @@
 # name: Fonts
 
-apt_cmd ttf-mscorefonts-installer
+apt_cmd ttf-mscorefonts-installer \
+        fonts-font-awesome \
+        fonts-hack-ttf \
+        fonts-powerline
+
+log -n downloading Meslo Nerd Font ... 
+FONTS_DIR=~/.local/share/fonts
+mkdir -p "$FONTS_DIR"
+wget -q -P "$FONTS_DIR" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf 
+wget -q -P "$FONTS_DIR" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+wget -q -P "$FONTS_DIR" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+wget -q -P "$FONTS_DIR" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+echo -e "\e[32mdone\e[39m"

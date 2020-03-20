@@ -1,0 +1,3 @@
+# name: neofetch
+
+apt_cmd neofetch

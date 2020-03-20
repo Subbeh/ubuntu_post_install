@@ -1,0 +1,23 @@
+# name: Dell Fan Control
+
+apt_cmd lm-sensors
+
+log installing dell-bios-fan-control ...
+TEMP_DIR="$(mktemp -d)"
+git clone https://github.com/TomFreudenberg/dell-bios-fan-control.git "$TEMP_DIR"
+make -C "$TEMP_DIR"
+sudo cp "$TEMP_DIR/dell-bios-fan-control" /usr/bin/
+[ $? -gt 0 ] && exit 1
+echo -e "\e[32mdone\e[39m"
+
+log adding dell-smm-hwmon to modules ...
+echo "options dell-smm-hwmon restricted=0 force=1" | sudo tee /etc/modprobe.d/dell-smm-hwmon.conf >/dev/null
+( grep -q "^dell-smm-hwmon$" /etc/modules ) || echo "dell-smm-hwmon" | sudo tee -a /etc/modules >/dev/null
+sudo update-initramfs -u
+echo -e "\e[32mdone\e[39m"
+
+log setting up i8kutils ...
+sudo apt-get install i8kutils
+( grep -q "^i8k$" /etc/modules ) || echo "i8k" | sudo tee -a /etc/modules >/dev/null
+echo "options i8k force=1" | sudo tee /etc/modprobe.d/i8k.conf >/dev/null
+echo -e "\e[32mdone\e[39m"

@@ -2,7 +2,6 @@
 
 apt_cmd libpango1.0-0 \
         libpangox-1.0-0
-TEMP_DEB="$(mktemp)" && \
+TEMP_DEB="$(mktemp --suffix=.deb)" && \
   wget -q -O "$TEMP_DEB" "${DROPBOX_URL:?not set}" && \
-  sudo dpkg -i "$TEMP_DEB" >/dev/null
-[ $? -gt 0 ] && sudo apt_cmd --fix-broken -y
+  sudo apt install "$TEMP_DEB" >/dev/null

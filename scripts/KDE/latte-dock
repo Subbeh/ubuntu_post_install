@@ -1,0 +1,4 @@
+# name: Latte Dock
+
+add_repository -f latte-dock "deb http://ppa.launchpad.net/rikmills/latte-dock/ubuntu ${REL_NAME:?not set} main"
+apt_cmd latte-dock

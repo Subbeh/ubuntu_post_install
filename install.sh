@@ -78,32 +78,44 @@ dlg() {
     options+=($id "$(sed -n 's/^# name: //p' $file)" off)
   done
 
-  choices=$(dialog --separate-output --checklist "$category" $((${#options[@]}/3+7)) 50 16 "${options[@]}" 2>&1 >/dev/tty)" "
+  choices+=$(dialog --separate-output --checklist "$category" $((${#options[@]}/3+7)) 50 16 "${options[@]}" 2>&1 >/dev/tty)" "
   clear
 }
 
-run_install() {
-  for choice in $choices ; do
-    log installing $(sed -n 's/^# name: //p' ${job_list[$choice]}) ...
-    source ${job_list[$choice]}
-    [ $? -gt 0 ] && log ERROR: cannot run ${job_list[$choice]}
-  done
+install() {
+  log installing $(sed -n 's/^# name: //p' $1) ...
+  source "$1"
+  [ $? -gt 0 ] && log ERROR: cannot run $1
 }
 
 
 main() {
   log Starting script
+  sudo -v
 
-  #sudo apt-get update >/dev/null
-  #[ -a scripts/preinstall ] && log running preinstallation steps ... && source scripts/preinstall
+  if [ ! -z $1 ] ; then
+    file=$(find "$(dirname "$0")/scripts" -name "$1" -type f)
+    if [ -r "$file" ] ; then
+      install $file 
+    else
+      log ERROR: cannot find $file
+      exit 1
+    fi
+    exit 0
+  fi
+
+  sudo apt-get update >/dev/null
+  [ -a scripts/preinstall ] && log running preinstallation steps ... && source scripts/preinstall
   for dir in scripts/* ; do
     if [ -d $dir ] ; then
       dlg "$(basename $dir)" $dir
     fi
   done
   
-  run_install
+  for choice in $choices ; do
+    install ${job_list[$choice]}
+  done
 }
 
 log_setup
-main
+main $*

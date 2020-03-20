@@ -1,0 +1,5 @@
+# name: Zoom
+
+TEMP_DEB="$(mktemp --suffix=.deb)" && \
+  wget -q -O "$TEMP_DEB" "https://zoom.us/client/latest/zoom_amd64.deb" && \
+  sudo apt install "$TEMP_DEB" >/dev/null

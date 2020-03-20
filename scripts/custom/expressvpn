@@ -1,0 +1,7 @@
+# name: ExpressVPN
+
+TEMP_DEB="$(mktemp --suffix=.deb)" && \
+  wget -q -O "$TEMP_DEB" ${EXPR_VPN_URL:?not set} && \
+  sudo apt install "$TEMP_DEB" >/dev/null
+expressvpn activate
+
