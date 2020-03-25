@@ -1,0 +1,4 @@
+# name: Font Manager
+
+add_repository -f font-manager "deb http://ppa.launchpad.net/font-manager/staging/ubuntu ${REL_NAME:?not set} main"
+apt_cmd font-manager

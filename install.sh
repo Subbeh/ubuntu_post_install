@@ -75,7 +75,7 @@ dlg() {
   for file in $2/* ; do
     id=$((job_id++))
     job_list[$id]=$file
-    options+=($id "$(sed -n 's/^# name: //p' $file)" off)
+    options+=($id "$(sed -n 's/^# name: //p' $file)" ${def:-off})
   done
 
   choices+=$(dialog --separate-output --checklist "$category" $((${#options[@]}/3+7)) 50 16 "${options[@]}" 2>&1 >/dev/tty)" "

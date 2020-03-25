@@ -1,0 +1,6 @@
+# name: Remmina
+
+add_repository -f remmina "deb http://ppa.launchpad.net/remmina-ppa-team/remmina-next/ubuntu ${REL_NAME:?not set} main"
+apt_cmd remmina \
+        remmina-plugin-rdp \
+        remmina-plugin-secret
