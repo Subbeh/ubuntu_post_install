@@ -33,6 +33,19 @@ apt_cmd() {
   fi
 }
 
+
+snap_cmd() {
+  log -n "installing snap package(s): $* ... "
+  sudo snap install $* >/dev/null  
+  if [ $? -gt 0 ] ; then 
+    echo -e "\e[31mfailed\e[39m" 
+    return 1
+  else
+    echo -e "\e[32msuccess\e[39m"
+  fi
+}
+
+
 add_repository() {
   if [ "$1" == "-f" ] ; then
     log -n "adding $2 repository to /etc/apt/sources.list.d/${2}.list ... "
@@ -52,22 +65,21 @@ add_repository() {
 }
 
 
-snap_cmd() {
-  log -n "installing snap package(s): $* ... "
-  sudo snap install $* >/dev/null  
-  if [ $? -gt 0 ] ; then 
-    echo -e "\e[31mfailed\e[39m" 
-    return 1
-  else
-    echo -e "\e[32msuccess\e[39m"
-  fi
+get_pkg() {
+  [ -z "$1" ] && log ERROR: no package specified && return 1
+  log -n "downloading package: $* ... \n" 
+  TEMP_DEB="$(mktemp --suffix=.deb)" && \
+    wget -q -O "$TEMP_DEB" "$*" && \
+    apt_cmd "$TEMP_DEB" 
 }
+
 
 update() {
   log -n "updating package list... "
   sudo apt-get update &> /dev/null
   echo -e "\e[32mdone\e[39m"
 }
+
 
 dlg() {
   declare -a options
@@ -81,6 +93,7 @@ dlg() {
   choices+=$(dialog --separate-output --checklist "$category" $((${#options[@]}/3+7)) 50 16 "${options[@]}" 2>&1 >/dev/tty)" "
   clear
 }
+
 
 install() {
   log installing $(sed -n 's/^# name: //p' $1) ...

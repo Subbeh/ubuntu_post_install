@@ -1,0 +1,3 @@
+# name: Slack
+
+get_pkg "https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb"

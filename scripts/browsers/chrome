@@ -1,5 +1,3 @@
 # name: Chrome
 
-TEMP_DEB="$(mktemp --suffix=.deb)" && \
-  wget -q -O "$TEMP_DEB" ${CHROME_URL:?not set} && \
-  sudo apt install "$TEMP_DEB" >/dev/null
+get_pkg ${CHROME_URL:?not set}
