@@ -1,0 +1,5 @@
+# name: Post Installation Cleanup
+
+sudo apt-get autoremove
+sudo apt-get clean
+

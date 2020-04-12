@@ -1,0 +1,3 @@
+# name: bat
+
+apt_cmd bat

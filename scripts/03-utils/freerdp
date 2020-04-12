@@ -1,0 +1,3 @@
+# name: FreeRDP
+
+apt_cmd freerdp2-x11
