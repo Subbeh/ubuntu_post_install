@@ -3,8 +3,8 @@
 declare -a job_list
 declare -i job_id=0
 
-if [ -f ".conf" ] ; then
-  source .conf
+if [ -f "config" ] ; then
+  source config
 fi
 
 
